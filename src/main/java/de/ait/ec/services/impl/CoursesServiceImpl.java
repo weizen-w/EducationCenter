@@ -240,6 +240,14 @@ public class CoursesServiceImpl implements CoursesService {
     return from(studentsOfCourse);
   }
 
+  @Override
+  public List<CourseDto> getPublishedCourses() {
+//        List<Course> courses = coursesRepository.findAllByState(Course.State.PUBLISHED);
+
+    List<Course> courses = coursesRepository.findAllPublishedCourses();
+    return from(courses);
+  }
+
   private Course getCourseOrThrow(Long courseId) {
     return coursesRepository.findById(courseId) // либо находим курс по id
         .orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND, "Course with id <" + courseId + "> not found"));

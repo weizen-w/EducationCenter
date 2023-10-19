@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static de.ait.ec.dto.UserDto.from;
 
 /**
@@ -26,7 +28,7 @@ public class UsersServiceImpl implements UsersService {
 
   private final UsersRepository usersRepository;
 
-  private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+  private final PasswordEncoder passwordEncoder;
 
   @Override
   public UserDto register(NewUserDto newUser) {
@@ -45,5 +47,15 @@ public class UsersServiceImpl implements UsersService {
     usersRepository.save(user);
 
     return from(user);
+  }
+
+  @Override
+  public UserDto getUserById(Long currentUserId) {
+    return from(usersRepository.findById(currentUserId).orElseThrow());
+  }
+
+  @Override
+  public List<UserDto> getAllUsers() {
+    return from(usersRepository.findAll());
   }
 }

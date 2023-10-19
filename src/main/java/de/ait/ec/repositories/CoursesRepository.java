@@ -2,12 +2,12 @@ package de.ait.ec.repositories;
 
 import de.ait.ec.models.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-/**
- * 20/09/2023 education-center
- *
- * @author Wladimir Weizen
- */
+import java.util.List;
+
 public interface CoursesRepository extends JpaRepository<Course, Long> {
 
+  @Query("select course from Course course where course.state = 'PUBLISHED'")
+  List<Course> findAllPublishedCourses();
 }

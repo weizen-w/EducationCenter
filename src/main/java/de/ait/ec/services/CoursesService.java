@@ -22,4 +22,6 @@ public interface CoursesService {
   List<UserDto> addStudentToCourse(Long courseId, StudentToCourseDto studentData);
 
   List<UserDto> getStudentsOfCourse(Long courseId);
+
+  List<CourseDto> getPublishedCourses();
 }

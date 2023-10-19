@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface LessonsRepository extends JpaRepository<Lesson, Long> {
+
   Set<Lesson> findAllByCourseOrderById(Course course);
 
   Optional<Lesson> findByCourseAndId(Course course, Long lessonId);
