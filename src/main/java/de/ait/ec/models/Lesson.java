@@ -17,24 +17,24 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Builder
 @Entity
-@EqualsAndHashCode(exclude = "course")
 public class Lesson {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(nullable = false)
-  private String name;
+    @Column(nullable = false)
+    private String name;
 
-  private LocalTime startTime;
-  private LocalTime finishTime;
+    private LocalTime startTime;
+    private LocalTime finishTime;
 
-  @Enumerated(value = EnumType.STRING)
-  private DayOfWeek dayOfWeek;
+    @Enumerated(value = EnumType.STRING)
+    private DayOfWeek dayOfWeek;
 
-  @ManyToOne
-  @JoinColumn(name = "course_id")
-  @ToString.Exclude
-  private Course course;
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    @ToString.Exclude
+    private Course course;
 }

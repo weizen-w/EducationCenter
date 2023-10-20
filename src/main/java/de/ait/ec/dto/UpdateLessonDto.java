@@ -17,19 +17,19 @@ import javax.validation.constraints.NotNull;
 @Schema(description = "Поля для обновления, null-значения сохраняются в базе")
 public class UpdateLessonDto {
 
-  @NotBlank // не может быть передана строка, состоящая из пробелов "    "
-  @NotEmpty // не может быть передана пустая строка ""
-  private String name;
+    @NotBlank // не может быть передана строка, состоящая из пробелов "    "
+    @NotEmpty // не может быть передана пустая строка ""
+    private String name;
 
-  @NotEmpty
-  @NotBlank
-  private String startTime;
+    @NotEmpty
+    @NotBlank
+    private String startTime;
 
-  @NotEmpty
-  @NotBlank
-  private String finishTime;
+    @NotEmpty
+    @NotBlank
+    private String finishTime;
 
-  @NotEmpty
-  @NotBlank
-  private String dayOfWeek;
+    @NotEmpty
+    @NotBlank
+    private String dayOfWeek;
 }

@@ -1,9 +1,6 @@
 package de.ait.ec.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Check;
 
 import javax.persistence.*;
@@ -23,34 +20,36 @@ import java.util.Set;
 @Entity
 public class Course {
 
-  public enum State {
-    DRAFT, PUBLISHED
-  }
+    public enum State {
+        DRAFT, PUBLISHED
+    }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(nullable = false, length = 20)
-  private String title;
+    @Column(nullable = false, length = 20)
+    private String title;
 
-  @Column(nullable = false, length = 1000)
-  private String description;
+    @Column(nullable = false, length = 1000)
+    private String description;
 
-  private LocalDate beginDate;
+    private LocalDate beginDate;
 
-  private LocalDate endDate;
+    private LocalDate endDate;
 
-  @Column(nullable = false)
-  private Double price;
+    @Column(nullable = false)
+    private Double price;
 
-  @Enumerated(value = EnumType.STRING)
-  private State state;
+    @Enumerated(value = EnumType.STRING)
+    private State state;
 
-  @ManyToMany(mappedBy = "courses")
-  private Set<User> students;
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "courses")
+    private Set<User> students;
 
-  @OneToMany(mappedBy = "course")
-  private Set<Lesson> lessons;
+    @ToString.Exclude
+    @OneToMany(mappedBy = "course")
+    private Set<Lesson> lessons;
 
 }

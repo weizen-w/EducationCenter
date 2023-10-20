@@ -5,23 +5,23 @@ import de.ait.ec.dto.*;
 import java.util.List;
 
 public interface CoursesService {
-  CourseDto addCourse(NewCourseDto newCourse);
+    CourseDto addCourse(NewCourseDto newCourse);
 
-  List<CourseDto> getCourses();
+    List<CourseDto> getCourses();
 
-  CourseDto getCourse(Long courseId);
+    CourseDto getCourse(Long courseId);
 
-  LessonDto addLessonToCourse(Long courseId, NewLessonDto newLesson);
+    LessonDto addLessonToCourse(Long courseId, NewLessonDto newLesson);
 
-  List<LessonDto> getLessonsOfCourse(Long courseId);
+    List<LessonDto> getLessonsOfCourse(Long courseId);
 
-  LessonDto deleteLessonFromCourse(Long courseId, Long lessonId);
+    LessonDto deleteLessonFromCourse(Long courseId, Long lessonId);
 
-  LessonDto updateLessonInCourse(Long courseId, Long lessonId, UpdateLessonDto updateLesson);
+    LessonDto updateLessonInCourse(Long courseId, Long lessonId, UpdateLessonDto updateLesson);
 
-  List<UserDto> addStudentToCourse(Long courseId, StudentToCourseDto studentData);
+    List<UserDto> addStudentToCourse(Long courseId, StudentToCourseDto studentData);
 
-  List<UserDto> getStudentsOfCourse(Long courseId);
+    List<UserDto> getStudentsOfCourse(Long courseId);
 
-  List<CourseDto> getPublishedCourses();
+    List<CourseDto> getPublishedCourses();
 }

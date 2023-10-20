@@ -21,6 +21,6 @@ import java.util.List;
 @Schema(name = "ValidationErrors", description = "информация об ошибках валидации")
 public class ValidationErrorsDto {
 
-  @Schema(description = "список ошибок валидации")
-  private List<ValidationErrorDto> errors;
+    @Schema(description = "список ошибок валидации")
+    private List<ValidationErrorDto> errors;
 }

@@ -10,5 +10,5 @@ import lombok.Data;
  */
 @Data
 public class StudentToCourseDto {
-  private Long userId;
+    private Long userId;
 }

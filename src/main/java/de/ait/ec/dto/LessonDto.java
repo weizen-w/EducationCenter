@@ -22,32 +22,32 @@ import java.util.stream.Collectors;
 @Builder
 public class LessonDto {
 
-  private Long id;
-  private String name;
-  private String startTime;
-  private String finishTime;
-  private String  dayOfWeek;
-  private Long courseId;
+    private Long id;
+    private String name;
+    private String startTime;
+    private String finishTime;
+    private String  dayOfWeek;
+    private Long courseId;
 
-  public static LessonDto from(Lesson lesson) {
-    LessonDto result = LessonDto.builder()
-        .id(lesson.getId())
-        .name(lesson.getName())
-        .startTime(lesson.getStartTime().toString())
-        .finishTime(lesson.getFinishTime().toString())
-        .dayOfWeek(lesson.getDayOfWeek().toString())
-        .build();
+    public static LessonDto from(Lesson lesson) {
+        LessonDto result = LessonDto.builder()
+                .id(lesson.getId())
+                .name(lesson.getName())
+                .startTime(lesson.getStartTime().toString())
+                .finishTime(lesson.getFinishTime().toString())
+                .dayOfWeek(lesson.getDayOfWeek().toString())
+                .build();
 
-    if (lesson.getCourse() != null) {
-      result.setCourseId(lesson.getCourse().getId());
+        if (lesson.getCourse() != null) {
+            result.setCourseId(lesson.getCourse().getId());
+        }
+
+        return result;
     }
 
-    return result;
-  }
-
-  public static List<LessonDto> from(Set<Lesson> lessons) {
-    return lessons.stream()
-        .map(LessonDto::from)
-        .collect(Collectors.toList());
-  }
+    public static List<LessonDto> from(Set<Lesson> lessons) {
+        return lessons.stream()
+                .map(LessonDto::from)
+                .collect(Collectors.toList());
+    }
 }

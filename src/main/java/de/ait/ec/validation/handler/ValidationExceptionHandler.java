@@ -23,34 +23,34 @@ import java.util.Scanner;
 @ControllerAdvice
 public class ValidationExceptionHandler {
 
-  // перехватывает ошибки валидации и возвращает клиенту читаемый JSON со всеми ошибками
-  @ExceptionHandler(value = MethodArgumentNotValidException.class)
-  public ResponseEntity<ValidationErrorsDto> handleValidationException(MethodArgumentNotValidException e) {
+    // перехватывает ошибки валидации и возвращает клиенту читаемый JSON со всеми ошибками
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public ResponseEntity<ValidationErrorsDto> handleValidationException(MethodArgumentNotValidException e) {
 
-    List<ValidationErrorDto> validationErrors = new ArrayList<>(); // создаем пустой список ошибок валидации для клиента
+        List<ValidationErrorDto> validationErrors = new ArrayList<>(); // создаем пустой список ошибок валидации для клиента
 
-    // 2 ошибки с полями и одна ошибка с формой в целом, то у вас будет два FieldError и один ObjectError
-    List<ObjectError> errors = e.getBindingResult().getAllErrors(); // получение всех возникших ошибок
+        // 2 ошибки с полями и одна ошибка с формой в целом, то у вас будет два FieldError и один ObjectError
+        List<ObjectError> errors = e.getBindingResult().getAllErrors(); // получение всех возникших ошибок
 
-    for (ObjectError error : errors) { // пробегаем по всем ошибкам
-      FieldError fieldError = (FieldError)error; // получаем из ObjectError значение FieldError (чтобы получить информацию по конкретному полю)
-      // формируем информацию об ошибке для будущего JSON
-      ValidationErrorDto errorDto = ValidationErrorDto.builder()
-          .field(fieldError.getField()) // указываем название поля
-          .message(fieldError.getDefaultMessage()) // указываем текст ошибки
-          .build();
+        for (ObjectError error : errors) { // пробегаем по всем ошибкам
+            FieldError fieldError = (FieldError)error; // получаем из ObjectError значение FieldError (чтобы получить информацию по конкретному полю)
+            // формируем информацию об ошибке для будущего JSON
+            ValidationErrorDto errorDto = ValidationErrorDto.builder()
+                    .field(fieldError.getField()) // указываем название поля
+                    .message(fieldError.getDefaultMessage()) // указываем текст ошибки
+                    .build();
 
-      if (fieldError.getRejectedValue() != null) { // если пользователь все-таки что-то ввел - мы это отправим ему обратно
-        errorDto.setRejectedValue(fieldError.getRejectedValue().toString()); // кладем в ответ
-      }
+            if (fieldError.getRejectedValue() != null) { // если пользователь все-таки что-то ввел - мы это отправим ему обратно
+                errorDto.setRejectedValue(fieldError.getRejectedValue().toString()); // кладем в ответ
+            }
 
-      validationErrors.add(errorDto); // положили ошибку в список
+            validationErrors.add(errorDto); // положили ошибку в список
+        }
+
+        return ResponseEntity
+                .badRequest() // 400-й статус
+                .body(ValidationErrorsDto.builder()
+                        .errors(validationErrors) // формируем общий список ошибок
+                        .build());
     }
-
-    return ResponseEntity
-        .badRequest() // 400-й статус
-        .body(ValidationErrorsDto.builder()
-            .errors(validationErrors) // формируем общий список ошибок
-            .build());
-  }
 }

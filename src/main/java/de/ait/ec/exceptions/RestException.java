@@ -9,14 +9,14 @@ import org.springframework.http.HttpStatus;
  * @author Marsel Sidikov (AIT TR)
  */
 public class RestException extends RuntimeException {
-  private final HttpStatus status;
+    private final HttpStatus status;
 
-  public RestException(HttpStatus status, String message) {
-    super(message);
-    this.status = status;
-  }
+    public RestException(HttpStatus status, String message) {
+        super(message);
+        this.status = status;
+    }
 
-  public HttpStatus getStatus() {
-    return status;
-  }
+    public HttpStatus getStatus() {
+        return status;
+    }
 }
